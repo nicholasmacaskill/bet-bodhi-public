@@ -23,15 +23,28 @@ export interface BodhiAnalysis {
     valueOdds?: number;
 }
 
-// Proprietary Elite lists redacted for public repo
-const ELITE_PITCHERS: string[] = [];
-const ELITE_BATS: string[] = [];
+// Map of 2026 Elite MLB Pitchers
+const ELITE_PITCHERS = [
+    "Gerrit Cole", "Zack Wheeler", "Corbin Burnes", "Logan Webb", "Tyler Glasnow",
+    "Luis Castillo", "Kevin Gausman", "Spencer Strider", "Yoshinobu Yamamoto",
+    "Framber Valdez", "Justin Steele", "Pablo Lopez", "Aaron Nola", "Tarik Skubal", "Paul Skenes",
+    "Shota Imanaga", "Michael Soroka", "Andrew Painter", "Andrew Abbott", "Logan Gilbert", "Drew Rasmussen", "Reid Detmers"
+];
 
-// Decision Weights (Examples - actual weights redacted)
-const WEIGHT_ELITE_PITCHER = 1.0;
-const WEIGHT_ELITE_BAT = 1.0;
+// Map of 2026 Elite MLB Bats
+const ELITE_BATS = [
+    "Shohei Ohtani", "Aaron Judge", "Ronald Acuna Jr.", "Mookie Betts", "Freddie Freeman",
+    "Juan Soto", "Corey Seager", "Yordan Alvarez", "Matt Olson", "Kyle Tucker",
+    "Mike Trout", "Bobby Witt Jr.", "Julio Rodriguez", "Bryce Harper", "Adley Rutschman",
+    "Jung Hoo Lee", "Jorge Soler", "LaMonte Wade Jr.", "Eloy Jimenez", "Connor Griffin",
+    "Jackson Chourio", "Logan O'Hoppe"
+];
+
+// Decision Weights
+const WEIGHT_ELITE_PITCHER = 3;
+const WEIGHT_ELITE_BAT = 1;
 const WEIGHT_HOT_BAT = 0.5;
-const WEIGHT_WEAK_PITCHER = -1.0;
+const WEIGHT_WEAK_PITCHER = -2;
 
 export class PillarAnalyzer {
 

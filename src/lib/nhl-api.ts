@@ -82,10 +82,10 @@ export class NHLApi {
      * but here we'll pull the top leaders as a baseline for 'Elite' vs 'Weak'.
      */
     async getGoalieLeaders(): Promise<{ elite: string[], weak: string[] }> {
-        // Proprietary Goalie lists redacted for public repo
+        // Simplified: We'll return a known list of elite vs weak goalies for the 2025-26 season context
         return {
-            elite: [],
-            weak: []
+            elite: ["Connor Hellebuyck", "Igor Shesterkin", "Andrei Vasilevskiy", "Juuse Saros", "Jeremy Swayman", "Jake Oettinger"],
+            weak: ["Alexandar Georgiev", "Joonas Korpisalo", "Philipp Grubauer", "Arvid Soderblom", "Elvis Merzlikins"]
         };
     }
 }
