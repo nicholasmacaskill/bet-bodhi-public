@@ -2,17 +2,14 @@ import { PillarScore, BodhiAnalysis } from './pillar-analyzer';
 
 export class NHLPillarAnalyzer {
 
-    analyzeGame(game: any, teamStats: any, oddsList: any[], leaders: { elite: string[], weak: string[] }): BodhiAnalysis {
+    analyzeGame(game: any, teamStats: any, oddsList: any[], leaders: { elite: string[], weak: string[] }, goalieStats?: any): BodhiAnalysis {
         const pillars: PillarScore[] = [];
 
         // 1. Technical Sport (Offense vs. Defense)
         const homeS = teamStats[game.homeTeam] || { goalsForPerGame: 3.1, goalsAgainstPerGame: 3.1 };
-        const awayS = teamStats[game.awayTeam] || { goalsForPerGame: 3.1, goalsAgainstPerGame: 3.1 };
+        const awayS = teamStats[game.awayTeam] || { goalsForPerGame: 3.1, awayS: 3.1 };
 
-        const homeOffenseVsAwayDefense = homeS.goalsForPerGame - awayS.goalsAgainstPerGame;
-        const awayOffenseVsHomeDefense = awayS.goalsForPerGame - homeS.goalsAgainstPerGame;
-
-        const techSportScore = this.scoreTechnicalSport(game, homeS, awayS, leaders);
+        const techSportScore = this.scoreTechnicalSport(game, homeS, awayS, leaders, goalieStats);
         pillars.push(techSportScore);
 
         // 2. Seasonal (Trend - Placeholder for now)
@@ -86,7 +83,7 @@ export class NHLPillarAnalyzer {
         };
     }
 
-    private scoreTechnicalSport(game: any, home: any, away: any, leaders: any): PillarScore {
+    private scoreTechnicalSport(game: any, home: any, away: any, leaders: any, goalieStats?: any): PillarScore {
         const hOffense = home.goalsForPerGame;
         const hDefense = home.goalsAgainstPerGame;
         const aOffense = away.goalsForPerGame;
@@ -94,8 +91,30 @@ export class NHLPillarAnalyzer {
 
         // Model: Expected goals based on offense vs opponent defense vulnerability
         const leagueAvg = 3.0;
-        const expectedH = (hOffense * aDefense) / leagueAvg;
-        const expectedA = (aOffense * hDefense) / leagueAvg;
+        let expectedH = (hOffense * aDefense) / leagueAvg;
+        let expectedA = (aOffense * hDefense) / leagueAvg;
+
+        // Goalie stats impact
+        let goalieNote = "";
+        if (goalieStats?.goalies) {
+            // Use the first goalie listed as the proxy for the starter in this context
+            // In a more complex app, we'd verify the confirmed starter.
+            const hGoalie = goalieStats.goalies.find((g: any) => g.teamId === game.homeTeamId);
+            const aGoalie = goalieStats.goalies.find((g: any) => g.teamId === game.awayTeamId);
+
+            if (hGoalie) {
+                const svPct = hGoalie.savePctg || 0.900;
+                if (svPct > 0.915) expectedA -= 0.3; // Elite goalie reduction
+                else if (svPct < 0.890) expectedA += 0.3; // Weak goalie boost
+                goalieNote += ` Home Goalie: ${hGoalie.name.default} (SV%: ${svPct.toFixed(3)}).`;
+            }
+            if (aGoalie) {
+                const svPct = aGoalie.savePctg || 0.900;
+                if (svPct > 0.915) expectedH -= 0.3;
+                else if (svPct < 0.890) expectedH += 0.3;
+                goalieNote += ` Away Goalie: ${aGoalie.name.default} (SV%: ${svPct.toFixed(3)}).`;
+            }
+        }
 
         let diff = expectedH - expectedA;
 
@@ -108,8 +127,9 @@ export class NHLPillarAnalyzer {
 
         let reason = absDiff > 0.4 ? `Strong ${favored} offense (${favored === 'home' ? hOffense.toFixed(1) : aOffense.toFixed(1)}) vs struggling defense.` : "Offensive units are balanced.";
         if (aDefense > 3.3 || hDefense > 3.3) {
-            reason += ` [!] Weak Goaltending/Defense detected: ${aDefense > 3.3 ? (away.fullName || 'Away') : (home.fullName || 'Home')}.`;
+            reason += ` [!] Weak Defense: ${aDefense > 3.3 ? away.fullName : home.fullName}.`;
         }
+        if (goalieNote) reason += goalieNote;
 
         return {
             pillar: "Technical (Sport)",

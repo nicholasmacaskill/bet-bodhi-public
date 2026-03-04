@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "scan": "tsx scripts/daily-scanner.ts",
+    "scan:watch": "tsx scripts/daily-scanner.ts --watch"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.91.0",

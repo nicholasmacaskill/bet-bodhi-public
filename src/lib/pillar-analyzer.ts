@@ -40,11 +40,11 @@ const ELITE_BATS = [
     "Jackson Chourio", "Logan O'Hoppe"
 ];
 
-// Decision Weights
-const WEIGHT_ELITE_PITCHER = 3;
+// Decision Weights - Pitching is paramount
+const WEIGHT_ELITE_PITCHER = 15;
 const WEIGHT_ELITE_BAT = 1;
 const WEIGHT_HOT_BAT = 0.5;
-const WEIGHT_WEAK_PITCHER = -2;
+const WEIGHT_WEAK_PITCHER = -15;
 
 export class PillarAnalyzer {
 
@@ -77,6 +77,17 @@ export class PillarAnalyzer {
         let bookiesScore = 5;
         let bookiesReason = "Neutral market framing.";
 
+        let vetoReason = "";
+        let isVetoed = false;
+
+        // Veto Logic: Never bet AGAINST an Elite Pitcher or ON a Weak Pitcher
+        const homePitcher = details?.probables?.home || "";
+        const awayPitcher = details?.probables?.away || "";
+        const isHomeElite = ELITE_PITCHERS.includes(homePitcher) || hotBats.includes(homePitcher); // hotBats could contain ERA leaders if inverted, but we check explicitly
+        const isAwayElite = ELITE_PITCHERS.includes(awayPitcher) || hotBats.includes(awayPitcher);
+        const isHomeWeak = weakPitchers.includes(homePitcher);
+        const isAwayWeak = weakPitchers.includes(awayPitcher);
+
         if (market && market.bookmakers && market.bookmakers.length > 0) {
             const h2h = market.bookmakers[0].markets.find((m: any) => m.key === 'h2h');
             if (h2h) {
@@ -107,6 +118,28 @@ export class PillarAnalyzer {
                     bookiesReason = `DOG-LEAN: Balanced matchup. Value lean on ${dogSide} at ${Math.max(hOdds, aOdds)}.`;
                     valueTeam = dogSide;
                     valueOdds = Math.max(hOdds, aOdds);
+                }
+
+                // Apply Strict Veto Rules based on user request ('never bet against top pitcher')
+                if (valueTeam === 'home' && isAwayElite) {
+                    isVetoed = true;
+                    vetoReason = `VETO: Algorithm identified +EV on Home, but Away has elite pitcher (${awayPitcher}). Pitching strength overrides.`;
+                } else if (valueTeam === 'away' && isHomeElite) {
+                    isVetoed = true;
+                    vetoReason = `VETO: Algorithm identified +EV on Away, but Home has elite pitcher (${homePitcher}). Pitching strength overrides.`;
+                } else if (valueTeam === 'home' && isHomeWeak) {
+                    isVetoed = true;
+                    vetoReason = `VETO: Algorithm identified +EV on Home, but Home pitcher (${homePitcher}) is flagged as weak.`;
+                } else if (valueTeam === 'away' && isAwayWeak) {
+                    isVetoed = true;
+                    vetoReason = `VETO: Algorithm identified +EV on Away, but Away pitcher (${awayPitcher}) is flagged as weak.`;
+                }
+
+                if (isVetoed) {
+                    bookiesScore = 2; // Tank the bookies score
+                    bookiesReason = vetoReason;
+                    valueTeam = undefined;
+                    valueOdds = undefined;
                 }
             }
         }

@@ -4,6 +4,8 @@
  * Includes 'Simulator' mode for local development.
  */
 
+import { EspnOddsApi } from './espn-odds-api';
+
 export interface OddsData {
     id: string;
     sport_key: string;
@@ -27,6 +29,7 @@ export interface OddsData {
 export class OddsApi {
     private apiKey: string | undefined = process.env.SPORTSBOOK_API_KEY;
     private baseUrl = 'https://api.the-odds-api.com/v4/sports';
+    private espn = new EspnOddsApi();
 
     /**
      * Fetch H2H (Moneyline) odds for MLB.
@@ -57,18 +60,70 @@ export class OddsApi {
     }
 
     private async getOdds(sportKey: string): Promise<OddsData[]> {
-        if (!this.apiKey || this.apiKey === 'your_sportsbook_api_key') {
-            return this.getMockOdds(sportKey);
+        // Try live API if key is present and not the placeholder
+        if (this.apiKey && this.apiKey !== 'your_sportsbook_api_key' && !this.apiKey.startsWith('LOCAL_')) {
+            const url = `${this.baseUrl}/${sportKey}/odds/?apiKey=${this.apiKey}&regions=us&markets=h2h&oddsFormat=decimal`;
+            try {
+                const response = await fetch(url);
+                if (response.ok) return await response.json();
+            } catch (e) {
+                console.warn(`Live API call failed for ${sportKey}, trying fallbacks...`);
+            }
         }
 
-        const url = `${this.baseUrl}/${sportKey}/odds/?apiKey=${this.apiKey}&regions=us&markets=h2h&oddsFormat=decimal`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error("Odds API Fetch Failed");
-            return await response.json();
-        } catch (e) {
-            console.warn(`Using Mock ${sportKey} Odds (API call failed or key missing)`);
-            return this.getMockOdds(sportKey);
+        // ── Fallback 1: ESPN (Keyless) ──────────────────────────────────────
+        const espnSport = this.mapToEspnSport(sportKey);
+        if (espnSport) {
+            try {
+                const espnOdds = await this.espn.getOdds(espnSport);
+                if (espnOdds && espnOdds.length > 0) {
+                    const mapped = espnOdds
+                        .filter(o => o.moneyline.home !== undefined && o.moneyline.away !== undefined)
+                        .map(o => ({
+                            id: `espn_${o.homeTeam}_${Date.now()}`,
+                            sport_key: sportKey,
+                            commence_time: new Date().toISOString(),
+                            home_team: o.homeTeam,
+                            away_team: o.awayTeam,
+                            bookmakers: [{
+                                key: "espn_bet",
+                                title: "ESPN Bet",
+                                last_update: new Date().toISOString(),
+                                markets: [{
+                                    key: "h2h",
+                                    outcomes: [
+                                        { name: o.homeTeam, price: this.americanToDecimal(o.moneyline.home!) },
+                                        { name: o.awayTeam, price: this.americanToDecimal(o.moneyline.away!) }
+                                    ]
+                                }]
+                            }]
+                        }));
+                    if (mapped.length > 0) return mapped;
+                }
+            } catch (e) {
+                console.warn(`ESPN Fallback failed for ${sportKey}`);
+            }
+        }
+
+        // ── Fallback 2: Mock Data ───────────────────────────────────────────
+        console.warn(`Using Mock ${sportKey} Odds (No API key and Fallback failed)`);
+        return this.getMockOdds(sportKey);
+    }
+
+    private mapToEspnSport(sportKey: string): 'basketball/nba' | 'hockey/nhl' | 'baseball/mlb' | null {
+        switch (sportKey) {
+            case 'basketball_nba': return 'basketball/nba';
+            case 'icehockey_nhl': return 'hockey/nhl';
+            case 'baseball_mlb': return 'baseball/mlb';
+            default: return null;
+        }
+    }
+
+    private americanToDecimal(american: number): number {
+        if (american >= 0) {
+            return (american / 100) + 1;
+        } else {
+            return (100 / Math.abs(american)) + 1;
         }
     }
 
@@ -255,91 +310,76 @@ export class OddsApi {
     private getMockNHLOdds(): OddsData[] {
         return [
             {
-                id: "nhl_mock_m1_1",
+                id: "nhl_sia_m3_1",
                 sport_key: "icehockey_nhl",
-                commence_time: "2026-03-01T18:00:00Z",
-                home_team: "Pittsburgh Penguins",
+                commence_time: "2026-03-03T23:00:00Z",
+                home_team: "Boston Bruins",
+                away_team: "Pittsburgh Penguins",
+                bookmakers: [{
+                    key: "draftkings", title: "SportsInteraction", last_update: "now",
+                    markets: [{
+                        key: "h2h", outcomes: [
+                            { name: "Boston Bruins", price: 1.85 }, { name: "Pittsburgh Penguins", price: 1.98 }
+                        ]
+                    }]
+                }]
+            },
+            {
+                id: "nhl_sia_m3_2",
+                sport_key: "icehockey_nhl",
+                commence_time: "2026-03-03T23:00:00Z",
+                home_team: "Buffalo Sabres",
                 away_team: "Vegas Golden Knights",
                 bookmakers: [{
-                    key: "draftkings", title: "DraftKings", last_update: "now",
+                    key: "draftkings", title: "SportsInteraction", last_update: "now",
                     markets: [{
                         key: "h2h", outcomes: [
-                            { name: "Pittsburgh Penguins", price: 2.10 }, { name: "Vegas Golden Knights", price: 1.80 }
+                            { name: "Buffalo Sabres", price: 1.72 }, { name: "Vegas Golden Knights", price: 2.18 }
                         ]
                     }]
                 }]
             },
             {
-                id: "nhl_mock_m1_2",
+                id: "nhl_sia_m3_3",
                 sport_key: "icehockey_nhl",
-                commence_time: "2026-03-01T21:00:00Z",
-                home_team: "Utah Mammoth",
-                away_team: "Chicago Blackhawks",
+                commence_time: "2026-03-03T23:00:00Z",
+                home_team: "Columbus Blue Jackets",
+                away_team: "Nashville Predators",
                 bookmakers: [{
-                    key: "draftkings", title: "DraftKings", last_update: "now",
+                    key: "draftkings", title: "SportsInteraction", last_update: "now",
                     markets: [{
                         key: "h2h", outcomes: [
-                            { name: "Utah Mammoth", price: 1.62 }, { name: "Chicago Blackhawks", price: 2.45 }
+                            { name: "Columbus Blue Jackets", price: 1.72 }, { name: "Nashville Predators", price: 2.18 }
                         ]
                     }]
                 }]
             },
             {
-                id: "nhl_mock_m1_3",
+                id: "nhl_sia_m3_4",
                 sport_key: "icehockey_nhl",
-                commence_time: "2026-03-01T21:00:00Z",
-                home_team: "San Jose Sharks",
-                away_team: "Winnipeg Jets",
-                bookmakers: [{
-                    key: "draftkings", title: "DraftKings", last_update: "now",
-                    markets: [{
-                        key: "h2h", outcomes: [
-                            { name: "San Jose Sharks", price: 3.20 }, { name: "Winnipeg Jets", price: 1.40 }
-                        ]
-                    }]
-                }]
-            },
-            {
-                id: "nhl_mock_m1_4",
-                sport_key: "icehockey_nhl",
-                commence_time: "2026-03-01T22:00:00Z",
-                home_team: "Minnesota Wild",
-                away_team: "St. Louis Blues",
-                bookmakers: [{
-                    key: "draftkings", title: "DraftKings", last_update: "now",
-                    markets: [{
-                        key: "h2h", outcomes: [
-                            { name: "Minnesota Wild", price: 1.74 }, { name: "St. Louis Blues", price: 2.15 }
-                        ]
-                    }]
-                }]
-            },
-            {
-                id: "nhl_mock_m1_5",
-                sport_key: "icehockey_nhl",
-                commence_time: "2026-03-01T23:30:00Z",
-                home_team: "New York Islanders",
+                commence_time: "2026-03-03T23:00:00Z",
+                home_team: "New Jersey Devils",
                 away_team: "Florida Panthers",
                 bookmakers: [{
-                    key: "draftkings", title: "DraftKings", last_update: "now",
+                    key: "draftkings", title: "SportsInteraction", last_update: "now",
                     markets: [{
                         key: "h2h", outcomes: [
-                            { name: "New York Islanders", price: 2.22 }, { name: "Florida Panthers", price: 1.71 }
+                            { name: "New Jersey Devils", price: 1.95 }, { name: "Florida Panthers", price: 1.87 }
                         ]
                     }]
                 }]
             },
             {
-                id: "nhl_mock_m1_6",
+                id: "nhl_sia_m3_5",
                 sport_key: "icehockey_nhl",
-                commence_time: "2026-03-02T01:00:00Z",
+                commence_time: "2026-03-03T23:30:00Z",
                 home_team: "Anaheim Ducks",
-                away_team: "Calgary Flames",
+                away_team: "Colorado Avalanche",
                 bookmakers: [{
-                    key: "draftkings", title: "DraftKings", last_update: "now",
+                    key: "draftkings", title: "SportsInteraction", last_update: "now",
                     markets: [{
                         key: "h2h", outcomes: [
-                            { name: "Anaheim Ducks", price: 2.30 }, { name: "Calgary Flames", price: 1.68 }
+                            { name: "Anaheim Ducks", price: 2.65 }, { name: "Colorado Avalanche", price: 1.55 }
                         ]
                     }]
                 }]

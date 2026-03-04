@@ -7,6 +7,8 @@ export interface NHLGame {
     id: number;
     homeTeam: string;
     awayTeam: string;
+    homeTeamId: number;
+    awayTeamId: number;
     startTime: string;
     venue?: string;
 }
@@ -40,6 +42,8 @@ export class NHLApi {
                 id: g.id,
                 homeTeam: lookup[g.homeTeam.abbrev] || g.homeTeam.name.default,
                 awayTeam: lookup[g.awayTeam.abbrev] || g.awayTeam.name.default,
+                homeTeamId: g.homeTeam.id,
+                awayTeamId: g.awayTeam.id,
                 startTime: g.startTimeUTC,
                 venue: g.venue?.default
             }));
@@ -87,5 +91,15 @@ export class NHLApi {
             elite: ["Connor Hellebuyck", "Igor Shesterkin", "Andrei Vasilevskiy", "Juuse Saros", "Jeremy Swayman", "Jake Oettinger"],
             weak: ["Alexandar Georgiev", "Joonas Korpisalo", "Philipp Grubauer", "Arvid Soderblom", "Elvis Merzlikins"]
         };
+    }
+
+    async getGameLanding(gameId: number): Promise<any> {
+        const url = `${this.baseUrl}/gamecenter/${gameId}/landing`;
+        try {
+            const response = await fetch(url);
+            return await response.json();
+        } catch (e) {
+            return null;
+        }
     }
 }

@@ -45,7 +45,10 @@ export class MLBApi {
                     home: homePitcher,
                     away: awayPitcher
                 },
-                lineups: game.lineups
+                lineups: {
+                    home: game.lineups?.homePlayers?.map((p: any) => p.fullName) || [],
+                    away: game.lineups?.awayPlayers?.map((p: any) => p.fullName) || []
+                }
             };
         });
     }
@@ -82,19 +85,35 @@ export class MLBApi {
             const homePitcher = data.gameData.probablePitchers?.home?.fullName;
             const awayPitcher = data.gameData.probablePitchers?.away?.fullName;
 
-            const parseLineup = (teamData: any) => {
-                if (!teamData || !teamData.lineup) return [];
-                return teamData.lineup.map((id: number) => {
-                    const player = teamData.players[`ID${id}`];
-                    return player?.person?.fullName || "Unknown";
-                });
+            // Boxscore format sometimes fails to hydrate linepus in spring, try to fall back to the live gameData format if boxscore lineup is empty
+            const parseLineup = (teamData: any, fallbackPlayers: any[]) => {
+                let lineup: string[] = [];
+                if (teamData && teamData.lineup) {
+                    lineup = teamData.lineup.map((id: number) => {
+                        const player = teamData.players[`ID${id}`];
+                        return player?.person?.fullName || "Unknown";
+                    });
+                }
+
+                // If boxscore logic failed to find players and we have a fallback, use it
+                if (lineup.length === 0 && fallbackPlayers && fallbackPlayers.length > 0) {
+                    lineup = fallbackPlayers.map(p => p.fullName);
+                }
+                return lineup;
             };
+
+            // Try to extract from schedule if it made it into the game feed but not the boxscore
+            const activeGameInfo = data.liveData?.plays?.currentPlay?.about || {};
+
+            // If boxscore lacks lineups, try to find them in the gameData players array
+            const fallbackHomePlayers = Object.values(data.gameData?.players || {}).filter((p: any) => p.currentTeam && p.currentTeam.id === data.gameData?.teams?.home?.id);
+            const fallbackAwayPlayers = Object.values(data.gameData?.players || {}).filter((p: any) => p.currentTeam && p.currentTeam.id === data.gameData?.teams?.away?.id);
 
             return {
                 gamePk,
                 lineups: {
-                    home: parseLineup(boxscore?.teams?.home),
-                    away: parseLineup(boxscore?.teams?.away)
+                    home: parseLineup(boxscore?.teams?.home, fallbackHomePlayers),
+                    away: parseLineup(boxscore?.teams?.away, fallbackAwayPlayers)
                 },
                 probables: {
                     home: homePitcher,

@@ -11,7 +11,7 @@ async function analyzeNHL() {
     const nhl = new NHLApi();
     const oddsSvc = new OddsApi();
     const analyzer = new NHLPillarAnalyzer();
-    const today = '2026-02-28';
+    const today = '2026-03-03';
 
     console.log(`\n====================================================`);
     console.log(`   BODHI NHL +EV ENGINE: ANALYZING HOCKEY ${today}  `);
