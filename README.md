@@ -131,7 +131,7 @@ Bet Bodhi's production architecture is documented across **17 technical dossiers
 | **14** | **Multi-Sport Pipeline & Bodhi Prism** | `bodhi-scanner-prism` | Cognitive AI & Swarms | 5 concurrent sports engines; 60% EV confidence floor | [Read Dossier](./docs/dossiers/14-multisport-scanner-prism-facade.md) |
 | **15** | **MLB Temporal Replay Architecture** | `bodhi-mlb-temporal-replay` | Quant & Microstructure | 5,107 games replayed; 98.4% market match; 5–10× speedup | [Read Dossier](./docs/dossiers/15-mlb-temporal-replay-historical-index.md) |
 | **16** | **Signal vs Execution Concentration** | `bodhi-signal-concentration` | Quant & Microstructure | Top-1 tradable 66.0% WR (153 bets); Top-5 63.6%; Signal 60% | [Read Dossier](./docs/dossiers/16-signal-vs-execution-concentration.md) |
-| **17** | **FAULTLINE Praxical Architecture** | `bodhi-faultline-praxical-breakdown-engine` | Quant & Microstructure | F-03 Win Rate: 45.2% (+171% Edge); Dublin VPS EIP-712 | [Read Dossier](./docs/dossiers/17-faultline-in-play-praxical-breakdown-engine.md) |
+| **17** | **Praxical Breakdown Architecture** | `bodhi-praxical-breakdown-architecture` | Quant & Microstructure | F-03 Win Rate: 45.2% (+171% Edge); Dublin VPS EIP-712 | [Read Dossier](./docs/dossiers/17-praxical-breakdown-architecture.md) |
 
 *The complete combined 16-dossier corpus is also archived locally in [`docs/ALL_BODHI_DOSSIERS.md`](./docs/ALL_BODHI_DOSSIERS.md).*
 
