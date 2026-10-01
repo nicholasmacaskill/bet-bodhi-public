@@ -15,12 +15,12 @@
 ```json
 {
   "id": "bodhi-faultline-praxical-breakdown-engine",
-  "title": "FAULTLINE: In-Play Praxical Breakdown & CLOB Microstructure Engine",
-  "subtitle": "Moving past Newtonian sabermetrics: Managerial praxical breakdown, somatic fatigue cliffs & decentralized orderbook latency arbitrage",
+  "title": "FAULTLINE Microstructure Engine",
+  "subtitle": "Managerial praxical breakdown, somatic fatigue cliffs & decentralized orderbook latency arbitrage",
   "category": "technical",
   "project": "Bet Bodhi",
   "discipline": "Quantitative Engineering & Microstructure",
-  "summary": "Replaces static Newtonian sabermetric win-expectancy (WE) lookup matrices with an active-state phenomenological execution engine. Quantitatively models the live transition from smooth coping to praxical crisis (Zuhandenheit to Vorhandenheit) in visiting managers and starting pitcher somatic collapse past 88 pitches against the top of the lineup (the F-03 confluence state). Exploits decentralized prediction market (Polymarket CLOB) pricing inertia to capture an empirical 45.2% win rate on -1 deficits in the 7th frame against 25%–30% market pricing (+171% backtested edge), protected by Dublin VPS EIP-712 routing, an automated 2x freeroll scalp, and a 13-stage Sovereign Crucible QA harness.",
+  "summary": "Models managerial praxical breakdown and pitcher somatic collapse past 88 pitches against Polymarket CLOB latency. Captures a 45.2% F-03 win rate on -1 deficits (+171% payout alpha) via Dublin VPS EIP-712 routing.",
   "metrics": "sample_size: 312_games // f03_win_rate: 45.2% // market_implied_wr: 27.2% // payout_alpha: +171% // polling_loop: 20s // vps_execution_latency: <2.8s // freeroll_derisk_target: 2.0x // crucible_invariants: 13/13_passed",
   "technologies": [
     "FAULTLINE Engine v1.2",
