@@ -1,4 +1,4 @@
-# Engineering Dossier: FAULTLINE: In-Play Praxical Breakdown & CLOB Microstructure Engine
+# Engineering Dossier: FAULTLINE Praxical Architecture
 
 **Project:** Bet Bodhi  
 **Discipline:** Quantitative Engineering & Microstructure // Distributed Systems & High-Throughput State  
@@ -15,7 +15,7 @@
 ```json
 {
   "id": "bodhi-faultline-praxical-breakdown-engine",
-  "title": "FAULTLINE Microstructure Engine",
+  "title": "FAULTLINE Praxical Architecture",
   "subtitle": "Managerial praxical breakdown, somatic fatigue cliffs & decentralized orderbook latency arbitrage",
   "category": "technical",
   "project": "Bet Bodhi",
@@ -75,7 +75,7 @@ However, static sabermetric models completely fail to account for **temporal pha
 
 This engineering dossier documents the design, theoretical architecture, and production deployment of **FAULTLINE v1.2**: an autonomous active-state execution engine that completely decouples physical sports microstructure from lagging market illusions.
 
-By combining **Heideggerian Praxical Breakdown** (*Zuhandenheit $\to$ Vorhandenheit*), **Merleau-Ponty Somatic Invalidation**, and **Epistemic Theory of Mind orderbook arbitrage**, FAULTLINE identifies the exact 7th-inning transition point where an exhausted starting pitcher and a paralyzed visiting manager collide with the top of the home team's lineup—executing automated, cross-border EIP-712 orders on Polymarket before the crowd can reprice the board.
+By combining **Heideggerian Praxical Breakdown** (*Zuhandenheit → Vorhandenheit*), **Merleau-Ponty Somatic Invalidation**, and **Epistemic Theory of Mind orderbook arbitrage**, FAULTLINE identifies the exact 7th-inning transition point where an exhausted starting pitcher and a paralyzed visiting manager collide with the top of the home team's lineup—executing automated, cross-border EIP-712 orders on Polymarket before the crowd can reprice the board.
 
 ---
 
@@ -343,4 +343,4 @@ Operational complexity is collapsed into direct, single-word root commands in fu
 
 FAULTLINE demonstrates that **the frontier of quantitative edge in sports markets is not more granular historical regression—it is the computational modeling of human cognitive and somatic collapse**.
 
-By formalizing Martin Heidegger’s concept of **Praxical Breakdown** (*Zuhandenheit $\to$ Vorhandenheit*) and Maurice Merleau-Ponty’s **Somatic Invalidation** into a real-time mathematical filter, FAULTLINE exposes the structural pricing latency of decentralized prediction markets. Combined with cross-border Dublin routing, automated 2x freeroll scalping, and a 13-stage Crucible verification harness, Bet Bodhi transforms in-play sports prediction from emotional speculation into a sovereign, institutional execution discipline.
+By formalizing Martin Heidegger’s concept of **Praxical Breakdown** (*Zuhandenheit → Vorhandenheit*) and Maurice Merleau-Ponty’s **Somatic Invalidation** into a real-time mathematical filter, FAULTLINE exposes the structural pricing latency of decentralized prediction markets. Combined with cross-border Dublin routing, automated 2x freeroll scalping, and a 13-stage Crucible verification harness, Bet Bodhi transforms in-play sports prediction from emotional speculation into a sovereign, institutional execution discipline.
