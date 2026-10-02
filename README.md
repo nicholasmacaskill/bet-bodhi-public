@@ -109,6 +109,17 @@ graph TD
 
 ---
 
+## 🏛️ In-Play Execution Architecture: Praxical Breakdown (F-03 Confluence)
+
+> **Formal Research Monograph:** [Praxical Breakdown Architecture (Dossier PBA-01)](https://flocanolabs.com/dossier/bodhi-praxical-breakdown-architecture)  
+> **Telemetry & Verification:** F-03 Comeback Win Rate: 45.2% (+171% edge over implied odds) // In-play evaluation: < 2.8s // Somatic fatigue threshold tracking
+
+<p align="center">
+  <img src="assets/dossiers/slide-02-dossier-pba-01.png" alt="Bet Bodhi — Praxical Breakdown Architecture (Dossier PBA-01)" width="720" />
+</p>
+
+---
+
 ## 🔬 The 17 Applied Engineering Dossiers (Flocano Labs Corpus)
 
 Bet Bodhi's production architecture is documented across **17 technical dossiers** published on the [Flocano Labs Sovereign R&D Forge](https://www.flocanolabs.com/flocanolabs/case-studies?project=bet-bodhi). Each dossier details an empirical solution to latency, relayer friction, or microstructure mispricing:
