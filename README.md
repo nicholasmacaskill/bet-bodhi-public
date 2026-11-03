@@ -221,4 +221,4 @@ Bet Bodhi is designed, engineered, and maintained by **Nicholas Alexander MacAsk
 
 ---
 
-*© 2026 Nicholas Alexander MacAskill. All rights reserved. Bet Bodhi is an experimental sovereign quantitative research system.*
+*All rights reserved Flocano Labs LLC USA.*
