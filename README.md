@@ -352,10 +352,13 @@ launchctl load ~/Library/LaunchAgents/com.betbodhi.pnlsync.plist
 
 ---
 
-## 🏛️ Sovereign Attribution & Portfolio
+## 🏛️ Sovereign Attribution & Legal Provenance
 
 Bet Bodhi is designed, engineered, and maintained by **Nicholas Alexander MacAskill** as part of the **Flocano Labs** applied algorithmic intelligence portfolio.
 
+* **Founder, CEO & Systems Architect:** Nicholas Alexander MacAskill ([@nicholasmacaskill](https://instagram.com/nicholasmacaskill))
+* **Entity:** Flocano Labs LLC (State of New Mexico Domestic LLC, Charter #7829104)
+* **Registered Office:** 1209 Mountain Road PL NE, Ste R, Albuquerque, NM 87110, USA
 * **Executive Portfolio & Practice:** [https://nicholasmacaskill.com](https://nicholasmacaskill.com)
 * **Flocano Labs Sovereign Forge:** [https://flocanolabs.com](https://flocanolabs.com)
 * **Technical Dossiers & Case Studies:** [https://www.flocanolabs.com/flocanolabs/case-studies](https://www.flocanolabs.com/flocanolabs/case-studies?project=bet-bodhi)
@@ -410,6 +413,6 @@ Bet Bodhi is designed, engineered, and maintained by **Nicholas Alexander MacAsk
 ─────────────────────────────────────────────────────────────────────────────
 GOVERNANCE: Flocano Labs LLC // Nicholas Alexander MacAskill
 CLASSIFICATION: Sovereign Algorithmic Intelligence & Quantitative Systems
-ALL RIGHTS RESERVED FLOCANO LABS LLC USA
+ALL RIGHTS RESERVED FLOCANO LABS LLC USA (NM #7829104)
 ─────────────────────────────────────────────────────────────────────────────
 ```
