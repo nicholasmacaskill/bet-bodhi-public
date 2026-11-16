@@ -9,7 +9,7 @@ This document outlines core engineering case studies derived from the **Bodhi Tr
 | Case Study | Domain | Core Technologies | Key Business Metrics |
 | :--- | :--- | :--- | :--- |
 | **1. LLM FinOps & Token Reduction** | AI Infrastructure / Cost Optimization | Gemini API, SQLite, Node.js, Telegram Bot API | **80% reduction** in input token sizes; strict **$2.00/day** hard budget ceiling |
-| **2. Real-Time On-Chain State Sync** | Web3 / High-Performance Data Pipeling | Polygon (USDC.e), CLOB Client, Ethers.js v6, Supabase | Execution checking reduced from **11m to <5s** (99.2% latency reduction) |
+| **2. Real-Time On-Chain State Sync** | Web3 / High-Performance Data Pipelining | Polygon (USDC.e), CLOB Client, Ethers.js v6, Supabase | Execution checking reduced from **11m to <5s** (99.2% latency reduction) |
 | **3. Algorithmic Circuit Breakers** | Risk Management / System Resilience | Node.js, Supabase, Mathematical Sizing | Automated **50% capital scaling reduction** during variance periods |
 
 ---

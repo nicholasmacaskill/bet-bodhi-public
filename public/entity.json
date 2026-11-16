@@ -3,7 +3,7 @@
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "@id": "https://github.com/nicholasmacaskill/bet-bodhi-agent-public#software",
+      "@id": "https://github.com/nicholasmacaskill/bet-bodhi-public#software",
       "name": "Bet Bodhi",
       "alternateName": [
         "BetBodhi",
@@ -16,8 +16,8 @@
       "operatingSystem": "Cross-platform (macOS, Linux, Node.js)",
       "softwareVersion": "2.4.0",
       "license": "https://opensource.org/licenses/MIT",
-      "url": "https://github.com/nicholasmacaskill/bet-bodhi-agent-public",
-      "codeRepository": "https://github.com/nicholasmacaskill/bet-bodhi-agent-public",
+      "url": "https://github.com/nicholasmacaskill/bet-bodhi-public",
+      "codeRepository": "https://github.com/nicholasmacaskill/bet-bodhi-public",
       "author": {
         "@type": "Person",
         "@id": "https://www.nicholasmacaskill.com/#person",
@@ -54,7 +54,7 @@
         "https://instagram.com/betbodhi",
         "https://threads.com/@betbodhi",
         "https://instagram.com/nicholasmacaskill",
-        "https://github.com/nicholasmacaskill/bet-bodhi-agent-public",
+        "https://github.com/nicholasmacaskill/bet-bodhi-public",
         "https://github.com/nicholasmacaskill/bet-bodhi",
         "https://www.flocanolabs.com/flocanolabs/case-studies"
       ]

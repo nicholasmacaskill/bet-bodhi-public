@@ -148,7 +148,7 @@ Built `place-bet.ts` to calculate slippage-adjusted limit orders, acting like a 
 
 ```bash
 # Installation
-git clone https://github.com/nicholasmacaskill/bet-bodhi.git
+git clone https://github.com/nicholasmacaskill/bet-bodhi-public.git
 npm install
 
 # Awakening the Agent

@@ -41,7 +41,7 @@ To combat the mid-season dip, the system has implemented the following controls:
 
 1. **Slump Circuit Breaker**:
    The `checkSlump()` detector automatically throttles all suggested stakes by `50%` if the model suffers a losing streak (3 consecutive losses or 4 out of last 5 lost). This preserves capital during high-variance mid-season periods.
-2. **Volative Regime Sizing**:
+2. **Volatile Regime Sizing**:
    The `macro-regime-daemon.ts` monitors rolling late-inning shifts. If the 3-day rolling average drops below `0.5`, it triggers a `REGIME_FLATLINED` alert via Telegram, advising the operator to reduce unit sizing and avoid "trailing favorite" angles.
 3. **Platoon & Late-Inning Bullpen Modifiers**:
    We added a dynamic **Bullpen Fatigue Penalty** (up to `-3.0` weight) and **Late Inning Mismatches** (`+1.0` bonus) to our [Pillar Analyzer](file:///Users/nicholasmacaskill/Downloads/bet-bodhi/src/lib/pillar-analyzer.ts) to discount starting pitcher bias when relief corps are spent.
