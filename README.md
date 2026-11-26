@@ -299,9 +299,25 @@ When this confluence triggers, Bet Bodhi executes automated EIP-712 limit orders
 
 ---
 
-## 🔬 The 17 Applied Engineering Dossiers (Flocano Labs Corpus)
+### [18] Multimodal Kinematic Execution Gating: Dual-Axis Fatigue Cliffs & 4-Engine Serverless Vision
 
-Bet Bodhi's production architecture is documented across **17 technical dossiers** published on the [Flocano Labs Sovereign R&D Forge](https://www.flocanolabs.com/flocanolabs/case-studies?project=bet-bodhi). Each dossier details an empirical solution to latency, relayer friction, or microstructure mispricing:
+> **discipline:** `Quantitative Engineering & Microstructure` &nbsp;|&nbsp; **telemetry:** `vision_latency: <24s // comeback_win_rate: 31.9% (vs 22.0% implied) // expected_roi: +35.6% // pass2_zoom: 4-fps // shadow_variants: 4 // ledger_drift: 0.00` &nbsp;|&nbsp; **dossier_id:** [`multimodal-kinematic-execution-gating`](https://www.flocanolabs.com/dossier/multimodal-kinematic-execution-gating)
+
+#### 1. Closing the Tabular Blind Spot via 4-Engine Serverless Vision
+Standard in-play sports models rely exclusively on tabular box-score telemetry, failing to observe multi-minute biomechanical breakdown until an adverse scoring run has already repriced the orderbook. **Multimodal Kinematic Execution Gating (`DOSSIER-MKEG-01`)** pairs Axis 1 calibrated athlete fatigue profiles (**31.9% historical comeback win rate vs. 22.0% implied probability, +35.6% expected ROI**) with a **4-Engine Serverless Computer Vision Pipeline** running on Google Gemini 2.5 Flash with zero local GPU or raw video disk storage:
+1. **Engine 1 — Rolling Slice Orchestrator:** Partitions full NBA broadcasts into deterministic rolling offset windows completing inference in 15–25 seconds beneath serverless ceilings.
+2. **Engine 2 — Cross-Slice Game Memory (`CrossSliceGameState`):** Propagates verified scoreboard deltas, continuous stint load, and unanswered run telemetry across slice boundaries.
+3. **Engine 3 — Multi-Layer Broadcast Replay Killer:** Rejects slow-motion broadcast replays via live scorebug clock verification, retrospective audio filtering, and bounded temporal deduplication.
+4. **Engine 4 — Pass 2 Adaptive 4-FPS Zoom Verifier:** Re-samples high-severity candidates at 4 FPS (250ms cadence) against an **8-Point Biomechanical Rubric Matrix** (`THORACIC_FLEXION`, `GROUND_REACTION_FORCE`, `TRANSITION_DECELERATION`, `CEMENT_CLOSEOUT`, `RESPIRATORY_DISTRESS`, `DRIVING_BURST_DECAY`, `SECOND_JUMP_EXTINCTION`, `OFF_BALL_PASSIVITY`).
+
+#### 2. Counterfactual Shadow Lab & Reconciled CLOB Multi-Fill Ledger
+Live signals fan out across a **Zero-Capital 4-Variant Counterfactual Shadow Lab** (Pure Statistical Control, Multi-Event Somatic Gate, 4-FPS Zoom-Locked Gate, and Fresh-Star Counterfactual Hedge) gated by pre-registered `N >= 100` promotion criteria, paired with signer-scoped `maker_orders` normalization that reconciled Polymarket CLOB multi-maker partial fills to **0.00 on-chain ledger drift**.
+
+---
+
+## 🔬 The 18 Applied Engineering Dossiers (Flocano Labs Corpus)
+
+Bet Bodhi's production architecture is documented across **18 technical dossiers** published on the [Flocano Labs Sovereign R&D Forge](https://www.flocanolabs.com/flocanolabs/case-studies?project=bet-bodhi). Each dossier details an empirical solution to latency, relayer friction, or microstructure mispricing:
 
 | # | Dossier Title | Slug | Discipline | Production Impact / Metric | Full Dossier Link |
 |:---|:---|:---|:---|:---|:---|
@@ -322,8 +338,9 @@ Bet Bodhi's production architecture is documented across **17 technical dossiers
 | **15** | **MLB Temporal Replay Architecture** | `bodhi-mlb-temporal-replay` | Quant & Microstructure | 5,107 games replayed; 98.4% market match; 5–10× speedup | [Read Dossier](./docs/dossiers/15-mlb-temporal-replay-historical-index.md) |
 | **16** | **Signal vs Execution Concentration** | `bodhi-signal-concentration` | Quant & Microstructure | Top-1 tradable 66.0% WR (153 bets); Top-5 63.6%; Signal 60% | [Read Dossier](./docs/dossiers/16-signal-vs-execution-concentration.md) |
 | **17** | **Praxical Breakdown Architecture** | `bodhi-praxical-breakdown-architecture` | Quant & Microstructure | F-03 Win Rate: 45.2% (+171% Edge); Dublin VPS EIP-712 | [Read Dossier](./docs/dossiers/17-praxical-breakdown-architecture.md) &nbsp;·&nbsp; [Canonical Web Shard](https://www.flocanolabs.com/dossier/bodhi-praxical-breakdown-architecture) |
+| **18** | **Multimodal Kinematic Execution Gating** | `multimodal-kinematic-execution-gating` | Quant & Microstructure | Vision < 24s; 31.9% WR vs 22.0% (+35.6% ROI); 4-FPS Zoom; 0.00 Drift | [Read Dossier](./docs/dossiers/18-multimodal-kinematic-execution-gating.md) &nbsp;·&nbsp; [Canonical Web Shard](https://www.flocanolabs.com/dossier/multimodal-kinematic-execution-gating) |
 
-*The complete combined 17-dossier corpus is also archived locally in [`docs/ALL_BODHI_DOSSIERS.md`](./docs/ALL_BODHI_DOSSIERS.md).*
+*The foundational 17-dossier corpus is archived in [`docs/ALL_BODHI_DOSSIERS.md`](./docs/ALL_BODHI_DOSSIERS.md), extended by Monograph M-13 ([`18-multimodal-kinematic-execution-gating.md`](./docs/dossiers/18-multimodal-kinematic-execution-gating.md)).*
 
 ---
 
